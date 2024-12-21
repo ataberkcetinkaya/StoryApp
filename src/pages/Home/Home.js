@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
 import './Home.css';
+import { useAuth } from '../../context/AuthContext';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../firebase';
 
 export default function Home() {
 
@@ -17,16 +20,45 @@ export default function Home() {
     }
   };
 
+  const { currentUser } = useAuth();
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      alert('Başarıyla çıkış yapıldı!');
+    } catch (error) {
+      console.error('Çıkış yaparken hata oluştu:', error);
+      alert('Çıkış yapılamadı. Lütfen tekrar deneyin.');
+    }
+  };
+
   return (
     <>
       <div className='navbar'>
-        <Link to="/login"><button>Giriş Yap</button></Link>
-        <Link to="/register"><button>Kayıt Ol</button></Link>
+        {currentUser ? (
+          <>
+            <span>Hoşgeldin, {currentUser.username}</span>
+            <button onClick={handleLogout}>Çıkış Yap</button>
+          </>
+        ) : (
+          <>
+            <Link to="/login"><button>Giriş Yap</button></Link>
+            <Link to="/register"><button>Kayıt Ol</button></Link>
+          </>
+        )}
         <button onClick={changeTheme}>Tema</button>
       </div>
       <div>
         <h1>Anasayfa</h1>
-        <p>Merhaba, burası anasayfa.</p>
+        {currentUser ? (
+          <>
+            <p>Story App'e Hoşgeldin {currentUser.username}</p>
+          </>
+        ) : (
+          <>
+            <p>Merhaba, burası anasayfa.</p>
+          </>
+        )}
       </div>
     </>
   )

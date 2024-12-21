@@ -46,3 +46,8 @@ form.form {
 /* .form-input:focus {
   border-color: #007BFF;
 } */
+
+span {
+  display: flex;
+  align-items: center;
+}

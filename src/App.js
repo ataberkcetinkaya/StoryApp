@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Register from './pages/Register/Register';
 import Login from './pages/Login/Login';
 import { useEffect } from 'react';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
   }, []);
   
   return (
+    <AuthProvider>
       <div className="App">
         <Routes>
           <Route path="/" element={<Home/>} />
@@ -24,6 +26,7 @@ function App() {
           <Route path="/login" element={<Login/>} />
         </Routes>
       </div>
+    </AuthProvider>
   );
 }
 
