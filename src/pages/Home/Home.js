@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom';
 import './Home.css';
 import { useAuth } from '../../context/AuthContext';
@@ -20,25 +20,18 @@ export default function Home() {
     }
   };
 
-  const { currentUser } = useAuth();
-
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      alert('Başarıyla çıkış yapıldı!');
-    } catch (error) {
-      console.error('Çıkış yaparken hata oluştu:', error);
-      alert('Çıkış yapılamadı. Lütfen tekrar deneyin.');
-    }
-  };
+  const { currentUser, loading } = useAuth();
 
   return (
-    <>
+    <div>
       <div className='navbar'>
-        {currentUser ? (
+        {loading ? ( //Eğer loading durumu varsa, "Yükleniyor" veya "Spinner"
+          <span>Yükleniyor...</span>
+        ) : currentUser ? (
           <>
-            <span>Hoşgeldin, {currentUser.username}</span>
-            <button onClick={handleLogout}>Çıkış Yap</button>
+            <span>Hoşgeldiniz, {currentUser.username || currentUser.email}</span>
+            <Link to="/profile"><button>Profil</button></Link>
+            <button onClick={() => signOut(auth)}>Çıkış Yap</button>
           </>
         ) : (
           <>
@@ -51,15 +44,11 @@ export default function Home() {
       <div>
         <h1>Anasayfa</h1>
         {currentUser ? (
-          <>
-            <p>Story App'e Hoşgeldin {currentUser.username}</p>
-          </>
+          <p>Story App'e Hoşgeldin, <p className="currentUser">{currentUser.username}</p></p>
         ) : (
-          <>
-            <p>Merhaba, burası anasayfa.</p>
-          </>
+          <p>Merhaba, burası anasayfa.</p>
         )}
       </div>
-    </>
-  )
+    </div>
+  );
 }

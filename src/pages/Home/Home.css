@@ -51,3 +51,7 @@ span {
   display: flex;
   align-items: center;
 }
+
+.currentUser {
+  color: rgb(63, 219, 2);
+}

@@ -11,6 +11,7 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(true); //Loading durumu
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -20,7 +21,7 @@ export function AuthProvider({ children }) {
         if (userDoc.exists()) {
           setCurrentUser({
             ...user,
-            username: userDoc.data().username //Kullanıcı adını al
+            username: userDoc.data().username //Kullanıcı adını çek
           });
         } else {
           setCurrentUser(user);
@@ -28,13 +29,14 @@ export function AuthProvider({ children }) {
       } else {
         setCurrentUser(null);
       }
+      setLoading(false); //Kullanıcı verisi yüklendiğinde loading'i false yap
     });
 
     return unsubscribe;
   }, []);
 
   return (
-    <AuthContext.Provider value={{ currentUser }}>
+    <AuthContext.Provider value={{ currentUser, loading }}>
       {children}
     </AuthContext.Provider>
   );

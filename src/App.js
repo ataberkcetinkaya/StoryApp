@@ -4,6 +4,8 @@ import Register from './pages/Register/Register';
 import Login from './pages/Login/Login';
 import { useEffect } from 'react';
 import { AuthProvider } from './context/AuthContext';
+import Profile from './pages/Profile/Profile';
+import PrivateRoute from './routes/PrivateRoute'
 
 function App() {
 
@@ -24,6 +26,7 @@ function App() {
           <Route path="/" element={<Home/>} />
           <Route path="/register" element={<Register/>} />
           <Route path="/login" element={<Login/>} />
+          <Route path="/profile" element={<PrivateRoute element={Profile}/>} />
         </Routes>
       </div>
     </AuthProvider>
