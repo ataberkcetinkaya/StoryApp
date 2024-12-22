@@ -21,7 +21,8 @@ export function AuthProvider({ children }) {
         if (userDoc.exists()) {
           setCurrentUser({
             ...user,
-            username: userDoc.data().username //Kullanıcı adını çek
+            username: userDoc.data().username, //Kullanıcı adını çek
+            photoURL: userDoc.data().profilePhoto || null, //Fotoğraf URL çek
           });
         } else {
           setCurrentUser(user);

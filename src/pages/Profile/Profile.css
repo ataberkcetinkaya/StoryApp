@@ -1,3 +1,55 @@
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* Ortalamak için flex container */
+    text-align: center;
+    margin: 20px;
+}
+  
 .userText {
     color: rgb(63, 219, 2);
 }
+  
+.photo-container {
+    margin: 20px 0;   /* Fotoğraf ve yazı arasındaki boşluk */
+}
+  
+.profilePhoto {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+    box-shadow: 0px 4px 10px rgb(63, 219, 2);
+    transition: transform 0.3s ease-in-out;
+}
+  
+.profilePhoto:hover {
+    transform: scale(1.05);
+}
+  
+.upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+  
+.upload-container input {
+    margin-bottom: 10px;
+}
+  
+@media (max-width: 768px) {
+    .profilePhoto {
+      width: 120px;
+      height: 120px;
+    }
+}
+  
+@media (max-width: 480px) {
+    .profilePhoto {
+      width: 100px;
+      height: 100px;
+    }
+}
+  
