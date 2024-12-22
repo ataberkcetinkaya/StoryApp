@@ -29,3 +29,12 @@
   border-color: rgb(63, 219, 2);
 }
   
+.welcomeMessage {
+  color: rgb(63, 219, 2);
+  font-size: 18px;
+}
+
+.loginError {
+  color: red;
+  font-size: 18px;
+}

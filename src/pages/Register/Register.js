@@ -11,17 +11,32 @@ export default function Register() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
+  const [error, setError] = React.useState("");
+  const [error2, setError2] = React.useState("");
+  const [error3, setError3] = React.useState("");
+  const [error4, setError4] = React.useState("");
+  const [generalError, setGeneralError] = React.useState("");
+  const [successRegister, setSuccessRegister] = React.useState(false);
 
   const navigate = useNavigate(); //Yönlendirme için useNavigate
 
+  const resetErrors = () => {
+    setError("");
+    setError2("");
+    setError3("");
+    setError4("");
+    setGeneralError("");
+  };
+
   const handleRegister = async (e) => {
     e.preventDefault(); //Formun yenilenmesini engeller
+    resetErrors(); //Form gönderildiğinde tüm hata mesajlarını sıfırla
     setIsLoading(true); //İşlem başladı
     try {
       //Firebase Authentication ile kullanıcı oluştur
       const usernameExists = await isUsernameTaken(nickname); //username duplicate kontrolü
       if (usernameExists) {
-        alert("Bu kullanıcı adı zaten alınmış. Lütfen başka bir kullanıcı adı deneyin.");
+        setError("Bu kullanıcı adı zaten alınmış. Lütfen başka bir kullanıcı adı seçin.");
         setIsLoading(false);
         return;
       }
@@ -34,22 +49,24 @@ export default function Register() {
         email: email,
       });
 
-      alert("Kayıt başarılı!");
-      navigate('/');
+      setSuccessRegister("Kayıt başarılı!");
+      setTimeout(() => {
+        navigate('/');
+      }, 1500);
     } catch (error) {
       console.error("Hata:", error.message);
       switch (error.code) {
         case "auth/email-already-in-use":
-          alert("Bu e-posta zaten kullanımda.");
+          setError2("Bu e-posta zaten kullanımda.");
           break;
         case "auth/invalid-email":
-          alert("Geçersiz bir e-posta adresi girdiniz.");
+          setError3("Geçersiz bir e-posta adresi girdiniz.");
           break;
         case "auth/weak-password":
-          alert("Şifre en az 6 karakter olmalıdır.");
+          setError4("Şifre en az 6 karakter olmalıdır.");
           break;
         default:
-          alert("Kayıt sırasında bir hata oluştu: " + error.message);
+          setGeneralError("Kayıt sırasında bir hata oluştu: " + error.message);
       }
     }
     finally {
@@ -81,6 +98,7 @@ export default function Register() {
               onChange={(e) => setNickname(e.target.value)}
               value={nickname}
               type="text" name="name" className="register-form-input" />
+            {error && <p className="registerError">{error}</p>}
           </label>
           <label className="register-form-label">
             E-posta:
@@ -89,6 +107,8 @@ export default function Register() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             type="email" name="email" className="register-form-input" />
+            {error2 && <p className="registerError">{error2}</p>}
+            {error3 && <p className="registerError">{error3}</p>}
           </label>
           <label className="register-form-label">
             Şifre:
@@ -98,10 +118,13 @@ export default function Register() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             type="password" name="password" className="register-form-input" />
+            {error4 && <p className="registerError">{error4}</p>}
           </label>
           <button type="submit" className="form-button" disabled={isLoading}>
             {isLoading ? "Kaydediliyor..." : "Kayıt Ol"}
           </button>
+          {successRegister && <p className="registerSuccess">{successRegister}</p>}
+          {generalError && <p className="registerError">{generalError}</p>}
         </form>
       </div>
     </>

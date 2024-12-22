@@ -38,6 +38,18 @@
 .upload-container input {
     margin-bottom: 10px;
 }
+
+.errorMessage {
+    color: red;
+    font-size: 1rem;
+    margin-top: 5px;
+}
+
+.successMessage {
+    color: green;
+    font-size: 1rem;
+    margin-top: 5px;
+}
   
 @media (max-width: 768px) {
     .profilePhoto {

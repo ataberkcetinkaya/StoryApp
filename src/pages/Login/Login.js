@@ -9,6 +9,8 @@ export default function Login() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [loading, setLoading] = React.useState(false);
+  const [welcomeMessage, setWelcomeMessage] = React.useState("");
+  const [loginError, setLoginError] = React.useState("");
 
   const navigate = useNavigate(); //Sayfa yönlendirme için useNavigate
 
@@ -20,11 +22,19 @@ export default function Login() {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      alert(`Hoş geldin ${user.email}!`);
-      navigate('/');
+      setWelcomeMessage(
+        <>
+          Hoş geldin {user.email}!
+          <br />
+          Giriş yapılıyor...
+        </>
+      );
+      setTimeout(() => {
+        navigate('/');
+      }, 1500);
     } catch (error) {
       console.error("Giriş Hatası:", error.message);
-      alert("Giriş sırasında bir hata oluştu.");
+      setLoginError("Giriş sırasında bir hata oluştu.");
     } finally {
       setLoading(false); //İşlem tamamlandı
     }
@@ -63,6 +73,8 @@ export default function Login() {
           >
             {loading ? "Giriş Yapılıyor..." : "Giriş Yap"}
           </button>
+          {welcomeMessage && <p className="welcomeMessage">{welcomeMessage}</p>}
+          {loginError && <p className="loginError">{loginError}</p>}
         </form>
       </div>
     </>

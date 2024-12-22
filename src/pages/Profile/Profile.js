@@ -11,6 +11,10 @@ export default function Profile() {
   const { currentUser } = useAuth();
   const [file, setFile] = React.useState(null);
   const [isUploading, setIsUploading] = React.useState(false);
+  const [fileError, setFileError] = React.useState("");
+  const [blankInput, setBlankInput] = React.useState(false);
+  const [successPhoto, setSuccessPhoto] = React.useState(false);
+  const [errorPhoto, setErrorPhoto] = React.useState(false);
 
    if (!currentUser) {
     return <p>Yükleniyor...</p>;
@@ -22,16 +26,22 @@ export default function Profile() {
     const file = e.target.files[0]; //Kullanıcı tarafından seçilen dosya
     if (file) {
       if (file.size > MAX_FILE_SIZE) {
-        alert("Dosya boyutu çok büyük! Lütfen 1MB'den küçük bir dosya seçin.");
-        window.location.reload(); //Sayfayı yenile
+        setFileError("Dosya boyutu çok büyük! Lütfen 1MB'den küçük bir dosya seçin.");
+        setFile(null); //Hatalı dosyayı sıfırla
         return; //Dosya boyutu büyükse, işlemi durdur
       }
       setFile(file); //Dosya boyutu uygun ise, durumu güncelle
+      setFileError(""); //Hata mesajını temizle
     }
   };
 
   const handleUpload = async () => {
-    if (!file) return alert("Lütfen bir fotoğraf seçin!");
+    setFileError(""); //Hata mesajını temizle
+    setBlankInput(""); //Hata mesajını temizle
+    if (!file) {
+      setBlankInput("Lütfen bir fotoğraf seçin!");
+      return;
+    }
     setIsUploading(true);
 
     try {
@@ -42,11 +52,13 @@ export default function Profile() {
       const userDoc = doc(db, "users", currentUser.uid);
       await updateDoc(userDoc, { profilePhoto: photoURL })
       
-      alert("Profil fotoğrafı başarıyla güncellendi!");
-      window.location.reload(); //Sayfayı yenile
+      setSuccessPhoto("Profil fotoğrafı başarıyla güncellendi!");
+      setTimeout(() => {
+        window.location.reload(); //Sayfayı yenile
+      }, 1500);
     } catch (error) {
       console.error("Fotoğraf yükleme hatası:", error);
-      alert("Bir hata oluştu!");
+      setErrorPhoto("Bir hata oluştu!");
     } finally {
       setIsUploading(false);
     }
@@ -76,9 +88,13 @@ export default function Profile() {
         {/* Dosya Seçme ve Yükleme Butonları */}
         <div className="upload-container">
           <input type="file" onChange={handleFileChange} />
+          {fileError && <p className="errorMessage">{fileError}</p>} {/* Hata mesajı */}
+          {blankInput && <p className="errorMessage">{blankInput}</p>} {/* Hata mesajı */}
           <button onClick={handleUpload} disabled={isUploading}>
             {isUploading ? "Yükleniyor..." : "Yükle"}
           </button>
+          {successPhoto && <p className="successMessage">{successPhoto}</p>}
+          {errorPhoto && <p className="errorMessage">{errorPhoto}</p>}
         </div>
       </div>
     </>

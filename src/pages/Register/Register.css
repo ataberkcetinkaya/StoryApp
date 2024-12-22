@@ -28,3 +28,11 @@
 .register-form-input:focus {
   border-color: rgb(63, 219, 2);
 }
+
+.registerError {
+  color: red;
+}
+
+.registerSuccess {
+  color: green;
+}
