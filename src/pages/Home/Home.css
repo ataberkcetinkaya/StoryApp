@@ -55,3 +55,59 @@ span {
 .currentUser {
   color: rgb(63, 219, 2);
 }
+
+.kayitliKullanicilar {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+
+.kayitliKullanicilar h2 {
+  margin: 0;
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.kayitliKullanicilar h2:hover {
+  background-color: rgb(50, 244, 50);
+  color: black;
+}
+
+.kayitliKullanicilar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.kayitliKullanicilar ul.expanded {
+  max-height: 400px; /* Adjust as needed */
+  overflow-y: auto;
+  transition: max-height 0.5s ease-in;
+}
+
+.kayitliKullanicilar p {
+  font-weight: 500;
+  color: rgb(50, 244, 50);
+  margin-right: 5px;
+}
+
+.kayitliKullanicilar li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.kayitliKullanicilar img {
+  margin-right: 10px;
+}
