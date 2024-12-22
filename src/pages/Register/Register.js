@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Register.css';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, collection, query, where, getDocs } from "firebase/firestore";
 
 export default function Register() {
 
@@ -19,6 +19,12 @@ export default function Register() {
     setIsLoading(true); //İşlem başladı
     try {
       //Firebase Authentication ile kullanıcı oluştur
+      const usernameExists = await isUsernameTaken(nickname); //username duplicate kontrolü
+      if (usernameExists) {
+        alert("Bu kullanıcı adı zaten alınmış. Lütfen başka bir kullanıcı adı deneyin.");
+        setIsLoading(false);
+        return;
+      }
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
@@ -49,6 +55,13 @@ export default function Register() {
     finally {
       setIsLoading(false); //İşlem bitti
     }
+  };
+
+  const isUsernameTaken = async (username) => {
+    const usersRef = collection(db, "users");
+    const q = query(usersRef, where("username", "==", username));
+    const querySnapshot = await getDocs(q);
+    return !querySnapshot.empty; 
   };
 
   return (
