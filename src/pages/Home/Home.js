@@ -5,6 +5,7 @@ import { useAuth } from '../../context/AuthContext';
 import { signOut } from 'firebase/auth';
 import { auth, db } from '../../firebase';
 import { collection, getDocs } from 'firebase/firestore';
+import DailyReward from '../Games/DailyReward';
 
 export default function Home() {
 
@@ -55,7 +56,9 @@ export default function Home() {
           <>
             <span>Hoşgeldiniz, {currentUser.username || currentUser.email}</span>
             <Link to="/profile"><button>Profil</button></Link>
-            <button onClick={() => signOut(auth)}>Çıkış Yap</button>
+            <button onClick={() => signOut(auth).then(() => {
+              window.location.reload();
+            })}>Çıkış Yap</button>
           </>
         ) : (
           <>
@@ -74,6 +77,8 @@ export default function Home() {
           <p>Merhaba, burası anasayfa.</p>
         )}
 
+        <DailyReward />
+
         <div className='kayitliKullanicilar' onClick={toggleDropdown}>
           <h2>Kayıtlı Kullanıcılar</h2>
             {users.length === 0 ? (
@@ -85,6 +90,7 @@ export default function Home() {
                   <img src={user.profilePhoto || "defaultProfilePic.jpg"} alt={user.username} style={{ width: 40, height: 40, borderRadius: "50%" }} />
                   <p>{user.username}</p>
                   <span>Son Giriş: {user.lastLogin ? new Date(user.lastLogin).toLocaleString() : "Bilinmiyor"}</span>
+                  <p style={{marginLeft: '5px'}}>Puan: {user.totalReward}</p>
                 </li>
               ))}
             </ul>
