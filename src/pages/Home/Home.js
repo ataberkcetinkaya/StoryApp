@@ -89,7 +89,7 @@ export default function Home() {
                 <li key={index}>
                   <img src={user.profilePhoto || "defaultProfilePic.jpg"} alt={user.username} style={{ width: 40, height: 40, borderRadius: "50%" }} />
                   <p>{user.username}</p>
-                  <span>Son Giriş: {user.lastLogin ? new Date(user.lastLogin).toLocaleString() : "Bilinmiyor"}</span>
+                  <span>Son Giriş: {user.lastLoginDate ? user.lastLoginDate : "Bilinmiyor"}</span>
                   <p style={{marginLeft: '5px'}}>Puan: {user.totalReward}</p>
                 </li>
               ))}

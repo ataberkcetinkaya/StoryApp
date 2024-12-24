@@ -143,7 +143,7 @@ export default function DailyReward() {
       />
       <div style={{ marginTop: '20px' }}>
         <h4 style={{ color: 'orange' }}>Ödül Bilgileriniz:</h4>
-        <p>Son Giriş Tarihi: {lastLogin ? formatDate(new Date(lastLogin)) : 'Henüz giriş yapılmadı'}</p>
+        <p>Son Giriş Tarihi: {lastLogin ? lastLogin : 'Henüz giriş yapılmadı'}</p>
         <p>Günlük Ödül: {reward} puan</p>
         <p>Toplam Ödül: {totalReward} puan</p>
       </div>
