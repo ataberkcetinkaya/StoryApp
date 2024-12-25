@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { AuthProvider } from './context/AuthContext';
 import Profile from './pages/Profile/Profile';
 import PrivateRoute from './routes/PrivateRoute'
+import GuessTheNumber from './pages/Games/GuessTheNumber';
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/register" element={<Register/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/profile" element={<PrivateRoute element={Profile}/>} />
+          <Route path="/games/guess-the-number" element={<GuessTheNumber/>} />
         </Routes>
       </div>
     </AuthProvider>

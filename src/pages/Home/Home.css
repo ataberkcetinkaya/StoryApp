@@ -111,3 +111,16 @@ span {
 .kayitliKullanicilar img {
   margin-right: 10px;
 }
+
+.blinkText {
+  color: rgb(50, 244, 50);
+  animation: blink 1s infinite;
+}
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}

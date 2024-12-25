@@ -72,7 +72,12 @@ export default function Home() {
       <div>
         <h1>Anasayfa</h1>
         {currentUser ? (
+          <>
           <p>Story App'e Hoşgeldin, <p className="currentUser">{currentUser.username}</p></p>
+          <Link to="/games/guess-the-number">
+            <button style={{ padding: '1px 10px' }}><p className="blinkText">Sayı Tahmin Oyna! Puan Kazan!</p></button>
+          </Link>
+          </>
         ) : (
           <p>Merhaba, burası anasayfa.</p>
         )}

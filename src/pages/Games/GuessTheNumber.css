@@ -1,0 +1,129 @@
+.game-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+.game-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+}
+
+/* Başlık */
+.game-title {
+    color: rgb(63, 219, 2);
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+/* Giriş kutusu */
+.guess-input {
+    font-size: 20px;
+    padding: 5px;
+    border-radius: 5px;
+    width: 8%;
+    border: 2px solid #ccc;
+    margin-bottom: 10px;
+    text-align: center;
+    transition: border-color 0.3s ease;
+}
+
+.guess-input:focus {
+    border-color: rgb(63, 219, 2);
+    outline: none;
+}
+
+/* Tahmin butonu */
+.guess-button {
+    background-color: rgb(63, 219, 2);
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.guess-button:hover {
+    background-color: #45a049;
+}
+
+.guess-button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+/* Kalan Haklar ve Puan */
+.attempts,
+.score {
+    font-size: 18px;
+    color: rgb(63, 219, 2);
+    margin: 10px 0;
+}
+
+/* Mesaj */
+.message {
+    font-size: 18px;
+    color: rgb(63, 219, 2);
+}
+
+/* Oyun Sonu */
+.game-over {
+    font-size: 20px;
+    font-weight: bold;
+    color: #007bff;
+    text-transform: uppercase;
+}
+
+.final-score {
+    font-size: 20px;
+    color: #28a745;
+    margin-top: 20px;
+}
+
+.correct-number {
+    font-size: 18px;
+    color: #007bff;
+}
+
+.restart-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.restart-button:hover {
+    background-color: #0056b3;
+}
+
+.congrats-message {
+    font-size: 24px;
+    font-weight: bold;
+    color: #28a745;
+    text-align: center;
+    animation: blink 1.5s infinite;
+    margin-bottom: 10px;
+  }
+  
+@keyframes blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+}  

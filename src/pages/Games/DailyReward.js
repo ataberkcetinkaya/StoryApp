@@ -132,7 +132,7 @@ export default function DailyReward() {
   return (
     <div style={{ textAlign: 'center', marginTop: '30px' }}>
       <button onClick={handleDailyReward}>
-        Günlük Giriş Ödülünü Al
+        Günlük Giriş Ödülünü Al - {reward} puan
       </button>
       <DailyRewardModal 
         isOpen={isModalOpen} 
@@ -142,10 +142,9 @@ export default function DailyReward() {
         message={message} 
       />
       <div style={{ marginTop: '20px' }}>
-        <h4 style={{ color: 'orange' }}>Ödül Bilgileriniz:</h4>
+        <h4 style={{ color: 'orange' }}>Bilgileriniz:</h4>
         <p>Son Giriş Tarihi: {lastLogin ? lastLogin : 'Henüz giriş yapılmadı'}</p>
-        <p>Günlük Ödül: {reward} puan</p>
-        <p>Toplam Ödül: {totalReward} puan</p>
+        <p>Toplam Puan: {totalReward} puan</p>
       </div>
     </div>
   );

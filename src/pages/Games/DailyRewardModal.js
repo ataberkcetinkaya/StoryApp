@@ -9,8 +9,7 @@ const DailyRewardModal = ({ isOpen, onClose, reward, totalReward, message }) => 
       <div className="modal-content">
         <h2>Günlük Ödül</h2>
         <p>{message}</p>
-        <p>Günlük Ödül: <strong>{reward}</strong> puan</p>
-        <p>Toplam Ödül: <strong>{totalReward}</strong> puan</p>
+        <p>Toplam Puan: <strong>{totalReward}</strong> puan</p>
         <button onClick={onClose} className="close-button">Kapat</button>
       </div>
     </div>
