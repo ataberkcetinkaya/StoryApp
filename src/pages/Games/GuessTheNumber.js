@@ -122,6 +122,7 @@ export default function GuessTheNumber() {
             <button className="guess-button" onClick={handleGuess}>Tahmin Et</button>
             <p className="attempts">Kalan Haklar: {attempts}</p>
             <p className="score">Puan: {score}</p>
+            <p className="message">{message}</p>
           </>
         )}
 
