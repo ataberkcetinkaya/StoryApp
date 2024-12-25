@@ -119,7 +119,7 @@ export default function DailyReward() {
         setReward(newReward);
         setTotalReward(newTotalReward);
         setLastLogin(today);
-        setMessage(`Günlük ödülünüz: ${newReward} puan. Toplam ödül: ${newTotalReward} puan.`);
+        setMessage(`Günlük ödülünüz: ${newReward} puan. Toplam Puan: ${newTotalReward}`);
         setIsModalOpen(true); //Modal'ı aç
       }
     } catch (error) {
