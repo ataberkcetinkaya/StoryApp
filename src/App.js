@@ -28,7 +28,7 @@ function App() {
           <Route path="/register" element={<Register/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/profile" element={<PrivateRoute element={Profile}/>} />
-          <Route path="/games/guess-the-number" element={<GuessTheNumber/>} />
+          <Route path="/games/guess-the-number" element={<PrivateRoute element={GuessTheNumber}/>} />
         </Routes>
       </div>
     </AuthProvider>
