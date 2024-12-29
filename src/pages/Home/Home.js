@@ -161,12 +161,15 @@ export default function Home() {
           >
             Anasayfa
           </button>
-          <button
+            {currentUser ? (
+            <button
             onClick={() => setActiveSection("middle")}
             className={activeSection === "middle" ? "active" : ""}
           >
             Sayı Tahmin
           </button>
+            ): <></>
+          }
           <button
             onClick={() => setActiveSection("right")}
             className={activeSection === "right" ? "active" : ""}
