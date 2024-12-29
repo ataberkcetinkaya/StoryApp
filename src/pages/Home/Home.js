@@ -78,7 +78,7 @@ export default function Home() {
         case "middle":
           return (
             <div className="middle-section">
-              <GuessTheNumber name="mobile" />
+              <GuessTheNumber />
             </div>
           );
         case "right":

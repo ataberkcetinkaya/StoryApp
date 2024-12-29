@@ -4,7 +4,7 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { Link } from 'react-router-dom';
 import './GuessTheNumber.css';
 
-export default function GuessTheNumber(mobile) {
+export default function GuessTheNumber() {
   const [randomNumber, setRandomNumber] = useState(generateRandomNumber());
   const [guess, setGuess] = useState("");
   const [message, setMessage] = useState("Tahmin yapmaya başla!");
@@ -98,7 +98,7 @@ export default function GuessTheNumber(mobile) {
 
   return (
     <>
-      {mobile ? (<> </>) : (
+      {window.innerWidth <= 768 ? (<> </>) : (
       <div className='navbar'>
         <Link to="/">
           <button className="back-button">Geri Dön</button>
