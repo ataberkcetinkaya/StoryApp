@@ -158,6 +158,11 @@ span {
   .bottom-navbar {
     display: flex; /* Sadece mobilde görünür */
   }
+
+  .kayitliKullanicilar {
+    bottom: 100px; /* Navbar'ın hemen üstü */
+    right: 1px; /* Sağ alt köşe */
+  }
 }
 
 /* Desktop Görünüm */
