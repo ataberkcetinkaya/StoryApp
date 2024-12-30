@@ -50,6 +50,7 @@ export default function Home() {
 
   const [activeSection, setActiveSection] = useState("left");
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [activeComponent, setActiveComponent] = useState(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -58,6 +59,12 @@ export default function Home() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  //Tüm buton ve ilgili bileşenler
+  const buttons = [
+    { name: 'Anasayfa', component: 'Home', content: null },
+    { name: 'Sayı Tahmin', component: 'GuessTheNumber', content: <GuessTheNumber /> },
+  ];
 
   const renderSection = () => {
     //mobile için
@@ -98,26 +105,27 @@ export default function Home() {
         <div className="homepage-grid">
           <div className="left-section">
             <div className='left-button-container'>
-              <Link to="/">
-                <button>Anasayfa</button>
-              </Link>
-              {currentUser ? (
-                <Link to="/games/guess-the-number">
-                  <button>Sayı Tahmin</button>
-                </Link>
-              ) : (
-                <></>
+              {/* Dinamik olarak butonları render et */}
+              {buttons.map((button) =>
+                (button.component !== 'GuessTheNumber' || currentUser) && ( //Şartlı render
+                  <button
+                    key={button.component}
+                    onClick={() => setActiveComponent(button.component)}
+                  >
+                    {button.name}
+                  </button>
+                )
               )}
+              </div>
             </div>
-          </div>
           <div className="middle-section">
-              {currentUser ? (
-                <>
-                  <p>Story App'e Hoşgeldin, <p className="currentUser">{currentUser.username}</p></p>
-                </>
-              ) : (
-                <p>Merhaba, burası anasayfa.</p>
-              )}
+            {currentUser ? (
+              buttons.find((button) => button.component === activeComponent)?.content || (
+                <p>Hoşgeldin, <p className="currentUser">{currentUser.username}</p></p>
+              )
+            ) : (
+              <p>Merhaba, burası anasayfa.</p>
+            )}
           </div>
           <div className="right-section">
             <h2>Günlük Ödül</h2>

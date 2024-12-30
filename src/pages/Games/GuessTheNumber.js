@@ -98,15 +98,6 @@ export default function GuessTheNumber() {
 
   return (
     <>
-      {window.innerWidth <= 768 ? (<> </>) : (
-      <div className='navbar'>
-        <Link to="/">
-          <button className="back-button">Geri Dön</button>
-        </Link>
-      </div>
-      )
-    }
-
       <div className="game-wrapper">
         <h1 className="game-title">Sayı Tahmin Oyunu</h1>
 
