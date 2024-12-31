@@ -69,7 +69,7 @@ export default function Profile() {
       return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const [activeSection, setActiveSection] = useState("left");
+  const [activeSection, setActiveSection] = useState("middle");
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [activeComponent, setActiveComponent] = useState(null);
 
@@ -86,20 +86,47 @@ export default function Profile() {
           case "left":
             return (
               <div className="left-section">
-                
+                <div className='left-button-container'>
+                  <h3>Yazdıklarım</h3>
+                </div>
               </div>
             );
           case "middle":
             return (
               <div className="middle-section">
-                <div>123</div>
+              {/* Profil Fotoğrafı */}
+              <div className="photo-container">
+                {currentUser?.photoURL && (
+                  <img 
+                    className="profilePhoto" 
+                    src={currentUser?.photoURL} 
+                    alt="Profil Fotoğrafı" 
+                  />
+                )}
               </div>
+
+              <div className="profile-container">
+                <h4>Selam <h3 className="userText">{currentUser.username}</h3> Profil sayfanı buradan düzenleyebilirsin.</h4>
+                {/* Dosya Seçme ve Yükleme Butonları */}
+                <div className="upload-container">
+                  <input type="file" onChange={handleFileChange} />
+                  {fileError && <p className="errorMessage">{fileError}</p>} {/* Hata mesajı */}
+                  {blankInput && <p className="errorMessage">{blankInput}</p>} {/* Hata mesajı */}
+                  <button onClick={handleUpload} disabled={isUploading}>
+                    {isUploading ? "Yükleniyor..." : "Yükle"}
+                  </button>
+                  {successPhoto && <p className="successMessage">{successPhoto}</p>}
+                  {errorPhoto && <p className="errorMessage">{errorPhoto}</p>}
+                </div>
+              </div>
+
+            </div>
             );
           case "right":
             return (
               <div className="right-section">
-                <h2>Günlük Ödül</h2>
-                <div>123</div>
+                <h2>Takipçiler</h2>
+                <h2>Takip Edilenler</h2>
               </div>
             );
           default:
@@ -173,14 +200,14 @@ export default function Profile() {
             onClick={() => setActiveSection("left")}
             className={activeSection === "left" ? "active" : ""}
           >
-            Anasayfa
+            Yazdıklarım
           </button>
             {currentUser ? (
             <button
             onClick={() => setActiveSection("middle")}
             className={activeSection === "middle" ? "active" : ""}
           >
-            Sayı Tahmin
+            Bilgilerim
           </button>
             ): <></>
           }
@@ -188,7 +215,7 @@ export default function Profile() {
             onClick={() => setActiveSection("right")}
             className={activeSection === "right" ? "active" : ""}
           >
-            Günlük Ödül
+            Takipçiler & Takip Edilenler
           </button>
         </div>
       )}
