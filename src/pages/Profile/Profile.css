@@ -64,4 +64,111 @@
       height: 100px;
     }
 }
+
+/* Genel Grid Yapısı */
+.homepage-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 20px;
+    padding: 20px;
+  }
   
+  /* Grid Bölümleri */
+  .left-section,
+  .middle-section,
+  .right-section {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    display: block; /* Desktop görünümde tüm bölümleri göster */
+  }
+  
+  /* Mobil Görünüm */
+  @media (max-width: 768px) {
+    .homepage-grid {
+      display: block;
+    }
+  
+    .homepage-grid .left-section.active,
+    .homepage-grid .middle-section.active,
+    .homepage-grid .right-section.active {
+      display: block;
+    }
+  
+    .bottom-navbar {
+      display: flex; /* Sadece mobilde görünür */
+    }
+  
+    .kayitliKullanicilar {
+      bottom: 100px; /* Navbar'ın hemen üstü */
+      right: 1px; /* Sağ alt köşe */
+    }
+  }
+  
+  /* Desktop Görünüm */
+  @media (min-width: 769px) {
+    .bottom-navbar {
+      display: none; /* Desktop çözünürlükte navbar gizli */
+    }
+  
+    .left-section,
+    .middle-section,
+    .right-section {
+      display: block; /* Desktop çözünürlükte tüm bölümleri görünür yap */
+    }
+  }
+  
+  /* Alt Bar */
+  .bottom-navbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid #ddd;
+    padding: 10px 0;
+    z-index: 1000;
+  }
+  
+  /* Dark tema için navbar arka plan rengi */
+  body.dark .bottom-navbar {
+    background-color: #333;
+    color: white;
+  }
+  /* Light tema için navbar arka plan rengi */
+  body.white .bottom-navbar {
+    background-color: #f8f8f8;
+    color: black;
+  }
+  
+  .bottom-navbar button {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #888;
+  }
+  
+  .bottom-navbar button.active {
+    color: rgb(50, 244, 50);
+    font-weight: bold;
+  }
+  
+  .bottom-navbar button:hover {
+    color: rgb(50, 244, 50);
+  }
+  
+  /* LEFT BUTTON CONTAINER */
+  .left-button-container {
+    display: flex;
+    flex-direction: column; /* Butonları alt alta sıralar */
+    align-items: center;
+  }
+  
+  .left-button-container button {
+    margin-bottom: 10px; /* Butonlar arasında boşluk bırakır */
+    font-size: 14px; /* Yazı boyutunu küçültür */
+    padding: 8px 12px; /* İç boşlukları küçültür */
+    width: 150px; /* Buton genişliğini ayarlar */
+  }

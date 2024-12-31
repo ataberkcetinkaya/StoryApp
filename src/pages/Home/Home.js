@@ -7,6 +7,7 @@ import { auth, db } from '../../firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import DailyReward from '../Games/DailyReward';
 import GuessTheNumber from '../Games/GuessTheNumber';
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
 
@@ -121,7 +122,11 @@ export default function Home() {
           <div className="middle-section">
             {currentUser ? (
               buttons.find((button) => button.component === activeComponent)?.content || (
-                <p>Hoşgeldin, <p className="currentUser">{currentUser.username}</p></p>
+                <>
+                  <p>Hoşgeldin, <p className="currentUser">{currentUser.username}</p></p>
+                  {/* <input type="text" placeholder="Aklından geçeni yaz..." className="custom-input" />
+                  <button>Gönder</button> */}
+                </>
               )
             ) : (
               <p>Merhaba, burası anasayfa.</p>
@@ -134,6 +139,12 @@ export default function Home() {
         </div>
       );
     }
+  };
+
+  const navigate = useNavigate();
+
+  const goToProfile = (username) => {
+    navigate(`/profile/${username}`);
   };
 
   return (
@@ -194,7 +205,7 @@ export default function Home() {
             ) : (
             <ul className={isExpanded ? 'expanded' : ''}>
               {users.map((user, index) => (
-                <li key={index}>
+                <li key={index} onClick={() => goToProfile(user.username)}>
                   <img src={user.profilePhoto || "defaultProfilePic.jpg"} alt={user.username} style={{ width: 40, height: 40, borderRadius: "50%" }} />
                   <p>{user.username}</p>
                   <span>Son Giriş: {user.lastLoginDate ? user.lastLoginDate : "Bilinmiyor"}</span>

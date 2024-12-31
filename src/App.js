@@ -7,6 +7,7 @@ import { AuthProvider } from './context/AuthContext';
 import Profile from './pages/Profile/Profile';
 import PrivateRoute from './routes/PrivateRoute'
 import GuessTheNumber from './pages/Games/GuessTheNumber';
+import ProfilePage from './pages/ProfilePage/ProfilePage';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
           <Route path="/register" element={<Register/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/profile" element={<PrivateRoute element={Profile}/>} />
+          <Route path="/profile/:username" element={<PrivateRoute element={ProfilePage} />} />
           <Route path="/games/guess-the-number" element={<PrivateRoute element={GuessTheNumber}/>} />
         </Routes>
       </div>
