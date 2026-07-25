@@ -41,7 +41,7 @@ export default function DailyReward() {
       const userSnap = await getDoc(userRef);
   
       if (userSnap.exists()) {
-        console.log('Kullanıcı verisi:', userSnap.data());
+        //console.log('Kullanıcı verisi:', userSnap.data());
         const data = userSnap.data();
         setLastLogin(data.lastLoginDate);
         setReward(data.dailyReward);
