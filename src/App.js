@@ -8,6 +8,7 @@ import Profile from './pages/Profile/Profile';
 import PrivateRoute from './routes/PrivateRoute'
 import GuessTheNumber from './pages/Games/GuessTheNumber';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
           <Route path="/profile/:username" element={<PrivateRoute element={ProfilePage} />} />
           <Route path="/games/guess-the-number" element={<PrivateRoute element={GuessTheNumber}/>} />
         </Routes>
+        <Analytics />
       </div>
     </AuthProvider>
   );
